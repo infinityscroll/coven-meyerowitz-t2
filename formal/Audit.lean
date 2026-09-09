@@ -1,0 +1,6 @@
+import StripeCollapse
+
+#check StripeCollapse.stripe_collapse_integral
+#print axioms StripeCollapse.stripe_collapse_integral
+#print axioms StripeCollapse.boolean_pow_eq_mapDomain
+#print axioms StripeCollapse.minors_force_aggregate_product_zero

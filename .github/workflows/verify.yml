@@ -1,0 +1,59 @@
+name: Full proof replay
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      LEAN_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Install pinned Lean and fetch pinned Mathlib cache
+        uses: leanprover/lean-action@50fcf42d2e460296f1a34b402e990d1b24f8b596
+        with:
+          lake-package-directory: formal
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'true'
+          use-github-cache: 'false'
+      - name: Rebuild all 35 modules, semantic probe, and 22 axiom guards
+        shell: bash
+        run: |
+          set -euo pipefail
+          sh formal/verify_full_t2.sh 2>&1 | tee verification.log
+      - name: Preserve replay output
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: full-t2-replay-${{ github.sha }}
+          path: verification.log
+          if-no-files-found: warn
+          retention-days: 30
+  paper:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Install TeX
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends texlive-latex-base texlive-latex-recommended texlive-fonts-recommended lmodern
+      - name: Compile paper twice
+        run: sh paper/build.sh
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: paper-${{ github.sha }}
+          path: output/pdf/coven-meyerowitz-t2.pdf
+          retention-days: 30

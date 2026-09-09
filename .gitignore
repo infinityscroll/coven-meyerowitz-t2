@@ -1,0 +1,12 @@
+**/.lake/
+**/.DS_Store
+tmp/
+verification.log
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.toc
+output/pdf/*.aux
+output/pdf/*.log
+output/pdf/*.out
+output/pdf/*.toc
