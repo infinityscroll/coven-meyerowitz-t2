@@ -9,4 +9,4 @@
 
 AI assistance was used in proof development, manuscript preparation, and Lean formalization. This is an unrefereed preprint, not an assertion of external endorsement, journal acceptance, or an established exclusive-priority claim. An arXiv identifier will be added only after arXiv has assigned it.
 
-The formalized new statement is unrestricted T2 necessity for finite integer tiles. The mathematical characterization also cites Coven and Meyerowitz's established T1 necessity and T1+T2 sufficiency; those two implications are not yet newly formalized here.
+The claimed new mathematical statement is unrestricted T2 necessity for finite integer tiles. The 13 September 2026 formal extension also verifies Coven and Meyerowitz's established T1 necessity and T1+T2 sufficiency, yielding the full characterization. Those classical results remain credited to Coven and Meyerowitz. The original manuscript snapshot describes the earlier T2-only companion; specify the commit when citing the added formal characterization.

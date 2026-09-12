@@ -28,17 +28,21 @@ jobs:
           lint: 'false'
           use-mathlib-cache: 'true'
           use-github-cache: 'false'
-      - name: Rebuild all 35 modules, semantic probe, and 22 axiom guards
+      - name: Rebuild full characterization, two semantic probes, and 42 axiom guards
         shell: bash
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: |
           set -euo pipefail
-          sh formal/verify_full_t2.sh 2>&1 | tee verification.log
+          sh formal/verify_characterization.sh 2>&1 | tee verification.log
       - name: Preserve replay output
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: full-t2-replay-${{ github.sha }}
-          path: verification.log
+          name: full-characterization-replay-${{ github.sha }}
+          path: |
+            verification.log
+            ${{ runner.temp }}/cm-characterization-replay.*/
           if-no-files-found: warn
           retention-days: 30
   paper:

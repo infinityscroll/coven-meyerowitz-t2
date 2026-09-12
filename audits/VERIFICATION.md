@@ -29,6 +29,26 @@ The audit checked that the polynomial is the literal mask polynomial, that `cons
 
 A second automated architectural review compared the full prose route with character, stripe, phase, and induction interfaces. It found no mismatch in those inspected sections. These bounded internal automated reviews are not complete independent human line-by-line verification and do not replace source replay.
 
+## Full characterization extension — 13 September 2026
+
+The three new mathematical modules `CMCharacterizationDefinitions`, `CMCharacterizationT1`, and `CMCharacterizationSufficiency` add period-independent classical predicates, T1 necessity, constructive T1+T2 sufficiency, and the full equivalence for arbitrary `Finset ℤ`. `CMCharacterizationSemanticsAudit` exposes the literal set-indicator covering equation and polynomial conditions. The new files do not alter the frozen 35-module T2 core or its original manifests.
+
+The exact final theorem is `CMCharacterization.finite_integer_tiling_iff_T1_T2`. It derives nonemptiness on the forward implication and imposes no prime-count, exponent, period, or unique-complement hypothesis. The finite primary-divisor cutoff is proved exhaustive for nonzero polynomials. The sufficiency construction does not invoke T2 necessity: missing-primary digit factors provide mass and root coverage, Fourier inversion proves exact convolution, and inverse normalization restores arbitrary signed integer sets. The known T1 and sufficiency mathematics is credited to Coven and Meyerowitz, not claimed as a new result.
+
+A complete macOS/arm64 replay finished at **2026-09-12 21:49:27 UTC** (13 September in India), with exit code 0. It recompiled the original 35 mathematical modules and cyclic semantic probe, then all three new mathematical modules and the signed-set semantic probe. All **42 exact axiom guards** passed: 22 existing and 20 additional. The only permitted final axioms are `propext`, `Classical.choice`, and `Quot.sound`.
+
+This local replay used the matching pinned Mathlib dependency cache; it rebuilt every authored proof module in this checkout. It was not a cold reconstruction of Mathlib or Lean. The updated public workflow independently runs the same extended verifier on a fresh runner and preserves its receipt, source identities, and individual logs. The workflow result must be checked at the exact commit; configuring it is not a claim that a future run has passed.
+
+| Added source | SHA256 |
+|---|---|
+| `CMCharacterizationDefinitions.lean` | `44ee67af55698ccba9fece656a03695ac78bef880c830bf85f13f5adb33397a5` |
+| `CMCharacterizationT1.lean` | `0fbbffd79884ae09f1fbce1b4ec25cf6687a546adbd976c498da1031a202f8e2` |
+| `CMCharacterizationSufficiency.lean` | `3d3d46318a1efa5d677e1158c4a65628ed6e6c2f613c2d6b2c0d0727cb5961d6` |
+| `CMCharacterizationSemanticsAudit.lean` | `0303952e994d74097e8003c99a1ae9290aad51eb5299854c92a0232c5bae2ed9` |
+| `verify_characterization.sh` | `11c1769a66487c665c7f8e2e780cd1d6c94aad10f1047dc200763010836ccf15` |
+
+Separate automated read-only reviews compared the new definitions and bridge arguments with the original CM statement and found no fatal scope mismatch in those inspected components. These reviews did not independently re-audit the entire earlier T2 core and are not human specialist reports. The development has not been accepted or merged by Mathlib.
+
 ## Remaining assessment boundary
 
 External specialist review, publication acceptance, and exclusive discovery priority remain unconfirmed. No specialist endorsement or referee correspondence is implied by this repository. Formal replay, semantic scope, attribution, novelty, and mathematical significance are separate questions.
