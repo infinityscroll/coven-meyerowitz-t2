@@ -4,6 +4,12 @@
 \usepackage[margin=1in]{geometry}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \usepackage{microtype}
+\hypersetup{
+ pdftitle={Coven--Meyerowitz T2 necessity through coprime stripe collapse},
+ pdfauthor={Jitendra Prajapati},
+ pdfsubject={Integer tilings and the Coven--Meyerowitz conditions},
+ pdfkeywords={integer tilings, cyclotomic polynomials, Coven--Meyerowitz, Lean}
+}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
@@ -13,33 +19,52 @@
 \newcommand{\PhiC}{\Phi}
 \newcommand{\code}[1]{\texttt{\small #1}}
 \title{Coven--Meyerowitz T2 necessity\\through coprime stripe collapse}
-\author{Public research artifact\thanks{Prepared with AI assistance. No personal author list, affiliation, external referee endorsement, or exclusive priority claim is assigned by this automated release. Maintained at \url{https://github.com/infinityscroll/coven-meyerowitz-t2}.}}
-\date{10 September 2026}
+\author{Jitendra Prajapati\thanks{Independent. Email: \href{mailto:23f1001521@ds.study.iitm.ac.in}{\texttt{23f1001521@ds.study.iitm.ac.in}}. ORCID: \href{https://orcid.org/0009-0008-7493-0311}{0009-0008-7493-0311}. Prepared with AI assistance, as described in the final section.}}
+\date{12 September 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
-We present a proof of the necessity of the Coven--Meyerowitz condition T2 for every finite set that tiles the integers by translations. The proof passes through actual Boolean cyclic tilings, retains the carry in prime-residue fibers, and obtains periodic row-or-column product stripes. Integral descent of convolution minors to a coprime quotient, followed by characteristic-prime Frobenius, forces a single stripe orientation. The resulting actual lower-period tilings exist for every independent phase, allowing strong induction to recover mixed cyclotomic zeros of both original factors. The associated Lean 4.23.0 development exposes the unrestricted integer-tiling statement and includes an explicit 35-module replay and 22 guarded axiom checks. The permitted final axioms are propositional extensionality, classical choice, and quotient soundness. This is a public research release for external review; specialist acceptance and exclusive discovery priority remain unconfirmed.
+We prove that every finite subset of the integers which tiles by translations satisfies the Coven--Meyerowitz condition T2, with no restriction on the number of prime factors or their exponents. Together with the necessity of T1 and the sufficiency of T1 and T2 proved by Coven and Meyerowitz, this gives their proposed characterization of finite integer tiles. The proof uses strong induction on a cyclic tiling period. Character identities produce periodic Boolean product stripes; integral descent to a coprime quotient and the Frobenius identity force a common orientation. Independent phase shifts then give smaller-period tilings from which the mixed cyclotomic zeros of the original factors can be recovered. A companion Lean formalization verifies the unrestricted T2 necessity statement.
 \end{abstract}
 
-\section{Statement and scope}
-For a finite nonempty integer set $A$, first translate so that all entries are nonnegative and write
+\section{Introduction}
+A finite set $A\subseteq\Z$ tiles the integers by translations if there exists a set $C\subseteq\Z$ such that every $t\in\Z$ has exactly one representation $t=a+c$, with $a\in A$ and $c\in C$. We write $A\oplus C=\Z$ and call $C$ a tiling complement. Uniqueness here concerns the representation of each integer, not the choice of complement: no uniqueness of the set $C$ is assumed. The problem of characterizing such finite sets can be expressed in terms of the cyclotomic divisors of their mask polynomials.
+
+For a finite nonempty integer set $A$, translate by $-\min A$ and write
 \[
  A(X)=\sum_{a\in A}X^a,\qquad
  S_A=\{p^e:p\text{ prime},\ e\ge1,\ \PhiC_{p^e}(X)\mid A(X)\}.
 \]
-Divisibility is in $\Z[X]$. Translation does not change any of these cyclotomic divisibilities. Condition T2 says that $\PhiC_{s_1\cdots s_k}$ divides $A(X)$ whenever $s_1,\ldots,s_k\in S_A$ have distinct underlying primes. Here $k\ge1$; the empty product is not required.
+Divisibility is in $\Z[X]$, and the normalization does not change cyclotomic divisibility. The two conditions of Coven and Meyerowitz are
+\begin{align*}
+ \mathrm{(T1)}\quad & A(1)=\prod_{s\in S_A}\PhiC_s(1),\\
+ \mathrm{(T2)}\quad & \PhiC_{s_1\cdots s_k}(X)\mid A(X)
+ \quad\text{if }s_1,\ldots,s_k\in S_A\text{ have distinct underlying primes}.
+\end{align*}
+In T2, $k\ge1$; no condition for the empty product is imposed. The main result is the unrestricted necessity of T2.
 
 \begin{theorem}\label{thm:integer}
-Suppose a finite set $A\subseteq\Z$ tiles $\Z$ uniquely by translations. Then $A$ satisfies T2, without restriction on the number of selected primes, their exponents, the cardinality of $A$, or a tiling period.
+Every finite set $A\subseteq\Z$ that tiles $\Z$ by translations satisfies T2.
 \end{theorem}
 
-The public formal statement for nonnegative $A$ starts with an arbitrary function $c:\Z\to\mathbb N$ and the equations
+Coven and Meyerowitz proved that T1 is necessary for tiling and that T1 together with T2 is sufficient. They also proved the necessity of T2 when $|A|$ has at most two distinct prime factors~\cite[Theorems A, B1, and B2]{CM}. Theorem~\ref{thm:integer} has no restriction on the cardinality, prime factors, exponents, or a tiling period. Combining it with those results gives their proposed characterization.
+
+\begin{corollary}\label{cor:characterization}
+A nonempty finite set $A\subseteq\Z$ tiles $\Z$ by translations if and only if its normalized mask polynomial satisfies T1 and T2.
+\end{corollary}
+\begin{proof}
+Necessity is Theorem~\ref{thm:integer} together with T1 necessity~\cite[Theorem B1]{CM}; sufficiency is~\cite[Theorem A]{CM}.
+\end{proof}
+
+The proof reduces an integer tiling to an exact factorization of a finite cyclic group and then inducts on the period. Splitting the factors into prime-residue fibers requires retaining the cyclic carry; replacing the group by a direct product would lose precisely this information when the period has repeated prime factors. The character equations instead imply that the \emph{products} of suitable dephased fibers are periodic Boolean masks. Their values form complete row or column stripes. After descending to the coprime quotient in the integral group ring, the Frobenius identity forces all stripes to have the same orientation. This yields actual smaller-period tilings for every independent phase shift of the fibers. Using all these phase choices recovers the mixed zeros of the original factors, including those involving higher powers of the distinguished prime.
+
+The argument is given below independently of the implementation. The companion Lean development formalizes Theorem~\ref{thm:integer}; it does not yet formalize the two cited classical implications used in Corollary~\ref{cor:characterization}. Reproduction details are collected in Appendix~\ref{app:formal}. The relations with the established allocation, dilation, common-complement, and stripe arguments are described in the final section.
+
+For subsequent use, the tiling condition for a nonnegative $A$ may be written with the indicator $c=\mathbf{1}_C$ as
 \begin{equation}\label{eq:integer}
  \sum_{a\in A}c(t-a)=1\quad(t\in\Z).
 \end{equation}
-No periodicity assumption is imposed on $c$. Nonemptiness of $A$ and Booleanity of $c$ follow from these equations. The arbitrary-integer-set statement uses the ordinary polynomial $\sum_{a\in A}X^{a-\min A}$.
-
-Coven and Meyerowitz established that T1 is necessary for tiling and that T1 together with T2 is sufficient; they also proved T2 necessity when the tile cardinality has at most two distinct prime factors~\cite{CM}. Theorem~\ref{thm:integer} supplies the remaining necessity statement. The previously established T1 and sufficiency results are cited here, not newly formalized by this artifact. A July 2026 source still explicitly describes unrestricted T2 necessity as open~\cite{KF}; this is evidence of status in that text, not a certificate of exclusive priority for the present argument.
+Conversely, if $c:\Z\to\mathbb N$ satisfies these equations, then $A$ is nonempty and $c$ takes values in $\{0,1\}$, so its support is an ordinary tiling complement. Thus this function formulation adds no hypothesis. Periodicity will be derived, not assumed.
 
 \section{Cyclic masks and primary allocation}
 Write $J_N$ for the all-ones mask on $\Z_N$. Identify a finite cyclic set with its Boolean mask in the integral group ring $\Z[\Z_N]$, with multiplication given by convolution. Thus an actual unique cyclic tiling is
@@ -146,7 +171,7 @@ Column-only would make $U_iV_j=Y_j$ independent of $i$. Taking masses and using 
  U_iV_j=X_i,\qquad \sum_iX_i=J_M.
 \end{equation}
 
-\section{Actual lower tilings for every phase}
+\section{Actual lower tilings for every phase}\label{sec:phases}
 For an arbitrary integer phase vector $h=(h_0,\ldots,h_{p-1})$, put
 \[
  C_h=\sum_i T^{Rh_i}U_i.
@@ -196,7 +221,8 @@ Normalize the integer tile so that $\min A=0$, and put $L=\max A$. Equation~\eqr
 
 There are finitely many $L$-bit states. A repeated state gives a positive shift $N_0$ preserving the whole bi-infinite sequence by forward and backward determinism. Replace $N_0$ by a multiple $N>L$ if desired; it is still a period. Reduction of $A$ modulo $N$ is then injective, and the residue support $B$ of $c$ gives an actual cyclic tiling. With $N>L$, the canonical ordinary polynomial of the reduced $A$ is exactly the original polynomial. Theorem~\ref{thm:cyclic} proves T2. Translating back proves Theorem~\ref{thm:integer} for arbitrary finite integer sets. The Lean implementation chooses a support-exceeding period in this way.
 
-\section{Formal statement and reproducible workflow}
+\appendix
+\section{Formal statement and reproducibility}\label{app:formal}
 The final declaration is
 \begin{center}
 \code{FullCovenMeyerowitz.integer\_tile\_cyclotomic\_product}.
@@ -209,7 +235,8 @@ Its explicit Lean type quantifies over $E:\code{Finset}\ \mathbb N$, $c:\Z\to\ma
 There is no hidden prime-count, period, cardinality, or phase-closure premise. The additional declaration \code{arbitrary\_integer\_tile\_T2} derives nonemptiness and minimum-normalizes arbitrary finite integer sets.
 
 \small
-\begin{longtable}{>{\raggedright\arraybackslash}p{0.31\textwidth}>{\raggedright\arraybackslash}p{0.63\textwidth}}
+\begin{center}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.31\textwidth}>{\raggedright\arraybackslash}p{0.63\textwidth}}
 \textbf{Argument} & \textbf{Principal Lean modules}\\\hline
 Primary allocation & \code{PrimaryAllocation}\\
 Relative cyclotomic fields & \code{RelativeCyclotomic}, \code{RamifiedCyclotomic}\\
@@ -221,7 +248,8 @@ Original-factor recovery & \code{T2Induction}, \code{CommonComplementLift}\\
 Unrestricted cyclic induction & \code{CyclicT2Completion}\\
 Integer transfer & \code{IntegerTilingPeriodicity}, \code{IntegerCyclicReduction}, \code{IntegerSetNormalization}, \code{IntegerT2Completion}\\
 Exposed final statements & \code{FullCovenMeyerowitz}\\\hline
-\end{longtable}
+\end{tabular}
+\end{center}
 \normalsize
 
 The frozen project uses Lean 4.23.0 and Mathlib commit
@@ -235,20 +263,22 @@ The verifier checks three SHA256 source manifests, recompiles 35 mathematical mo
 
 The reported final axioms are exactly \code{propext}, \code{Classical.choice}, and \code{Quot.sound}. The release includes a GitHub Actions workflow that fetches pinned dependencies on a fresh runner and executes the complete verifier. Its log is the public replay record. This is not a from-source rebuild of every Mathlib dependency or an independent implementation of Lean's kernel; compiler and upstream-artifact trust remain part of the verification boundary. The prose, formal meaning, public chronology, and originality each require their own assessment.
 
-\section{Attribution, review, and limitations of the claim}
+\section{Attribution and disclosure}
 The cardinality/valuation allocation and common-complement inheritance have direct antecedents in CM Lemmas 2.1 and 2.5. Frobenius already appears in their tiling dilation argument, Lemma 3.1~\cite{CM}. Stripe partitions in the square-free CRT setting occur in Tao's Proposition 17~\cite{Tao}. Divisor-isometry freedom is treated by \L aba and Londner~\cite[Definition 3.3 and Lemma 3.4]{LL}. These ingredients are not individually claimed as new.
 
-The combination requiring comparison with expert knowledge is integral descent of product minors, coprime Boolean orientation collapse, coalescence into all-phase actual tilings, and recovery of the original factors. Coalescence changes base-$p$ divisibility and is not itself a divisor isometry. Product periodicity is not factor periodicity. The arbitrary phases in Section 6 are essential to the stated recovery of upper-$p$ roots.
+The combination requiring comparison with expert knowledge is integral descent of product minors, coprime Boolean orientation collapse, coalescence into all-phase actual tilings, and recovery of the original factors. Coalescence changes base-$p$ divisibility and is not itself a divisor isometry. Product periodicity is not factor periodicity. The arbitrary phases in Section~\ref{sec:phases} are essential to the stated recovery of upper-$p$ roots.
 
 The functional tiling counterexamples of Kiss, Londner, Matolcsi, and Somlai~\cite{KLMS} concern a fractional-function relaxation. The present proof relies essentially on Boolean sets and integral cancellation and asserts no corresponding unrestricted theorem for fractional functional tiles.
 
-The research artifact and its publication materials were prepared with AI assistance. Internal automated checks have reviewed the expanded final type, integer-to-cyclic transfer, and principal proof interfaces; these are not external human referee reports. The release-day bounded literature check did not identify a full predecessor, but cannot establish exclusive priority or rule out unpublished and differently formulated work. Specialist review and acceptance remain unconfirmed. This paper therefore presents the precise proof and reproducible formal artifact for scrutiny rather than reporting external recognition as an accomplished fact.
+The research was directed by Jitendra Prajapati. AI assistance was used in proof development, manuscript preparation, and Lean formalization. Automated proof and scope checks are not external human referee reports. This version is a preprint for specialist scrutiny; no external endorsement, journal acceptance, or exclusive priority determination is asserted.
+
+\paragraph{Availability and license.}
+The manuscript source and the companion formal development are maintained together at \url{https://github.com/infinityscroll/coven-meyerowitz-t2}. This manuscript, including its LaTeX source and compiled PDF, is licensed under the Creative Commons Attribution 4.0 International license (CC BY 4.0): \url{https://creativecommons.org/licenses/by/4.0/}. This manuscript license does not change the licenses of Lean, Mathlib, or other upstream dependencies.
 
 \begin{thebibliography}{9}
 \bibitem{CM} E. M. Coven and A. D. Meyerowitz, \emph{Tiling the integers with translates of one finite set}, Journal of Algebra 212 (1999), 161--174. Preprint submitted 1998. \url{https://arxiv.org/abs/math/9802122}.
 \bibitem{Tao} T. Tao, \emph{Some notes on the Coven--Meyerowitz conjecture}, 19 November 2011, with subsequent corrections in the discussion. \url{https://terrytao.wordpress.com/2011/11/19/some-notes-on-the-coven-meyerowitz-conjecture/}.
 \bibitem{LL} I. \L aba and I. Londner, \emph{Splitting for Integer Tilings}, International Mathematics Research Notices (2025), rnaf090. \url{https://doi.org/10.1093/imrn/rnaf090}.
-\bibitem{KF} M. Kadir and K. Fan, \emph{Tiles and weak tiles in $\Z_{pq}$}, arXiv:2607.02149, version 2 (2026), Section 1.3. \url{https://arxiv.org/html/2607.02149v2}.
 \bibitem{KLMS} G. Kiss, I. Londner, M. Matolcsi, and G. Somlai, \emph{Functional tilings and the Coven--Meyerowitz tiling conditions}, Discrete Analysis (2025), Paper No. 18. \url{https://arxiv.org/abs/2411.03854}.
 \end{thebibliography}
 \end{document}

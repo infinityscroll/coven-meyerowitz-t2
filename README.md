@@ -4,16 +4,21 @@
 
 This repository presents a proof of full **T2 necessity for finite integer tiles**, together with its Lean 4 formalization and an explicit all-module verification workflow.
 
+**Jitendra Prajapati · Independent**
+
+[23f1001521@ds.study.iitm.ac.in](mailto:23f1001521@ds.study.iitm.ac.in) · [ORCID 0009-0008-7493-0311](https://orcid.org/0009-0008-7493-0311)
+
 **Status: formally checked statement; public research release for external review.** External specialist acceptance and exclusive discovery priority are not established. Automated reviews are internal checks, not independent human refereeing. See [verification and provenance](audits/VERIFICATION.md).
 
 - [Paper (PDF)](output/pdf/coven-meyerowitz-t2.pdf) · [editable LaTeX source](paper/coven-meyerowitz-t2.tex)
+- [Minimal arXiv source archive](output/arxiv/coven-meyerowitz-t2-source.tar.gz) (the single self-contained manuscript source; no arXiv posting is implied).
 - [Final, fully exposed Lean theorem](formal/FullCovenMeyerowitz.lean)
 - [Verification workflow](.github/workflows/verify.yml) · [all-module verifier](formal/verify_full_t2.sh)
 - [Literature and attribution](audits/LITERATURE.md) · [citation guidance](CITATION.md)
 
 ## Statement
 
-Let a finite set $A\subseteq\mathbb Z$ tile the integers uniquely by translations. Translate it to have nonnegative entries and put $A(X)=\sum_{a\in A}X^a$. If $p_1,\ldots,p_k$ are distinct primes, $e_i>0$, and every $\Phi_{p_i^{e_i}}$ divides $A(X)$, then
+Let a finite set $A\subseteq\mathbb Z$ tile the integers by translations. This means there exists a set $C\subseteq\mathbb Z$ such that every integer has exactly one representation as $a+c$ with $a\in A$ and $c\in C$; the complement $C$ is **not** required to be unique. Translate $A$ to have nonnegative entries and put $A(X)=\sum_{a\in A}X^a$. If $p_1,\ldots,p_k$ are distinct primes, $e_i>0$, and every $\Phi_{p_i^{e_i}}$ divides $A(X)$, then
 
 $$
 \Phi_{\prod_{i=1}^k p_i^{e_i}}(X)\mid A(X).
@@ -61,4 +66,4 @@ The source rebuild relies on the pinned Lean toolchain and upstream dependency a
 
 Please report a proposed gap with the precise paper statement or Lean declaration and a reproducible explanation. Public issues are welcome. This repository was prepared with AI assistance; the included automated scope and architectural reviews are not external referee reports. No specialist endorsement is implied.
 
-This public release preserves the frozen Lean sources and their original hash manifests. The paper and publication documentation are newly prepared for this release. No personal author name or additional reuse license is assigned by the automated publication process; see [CITATION.md](CITATION.md).
+This repository preserves the frozen Lean sources and their original hash manifests. The manuscript, including its LaTeX source and PDF, is licensed under [CC BY 4.0](LICENSE.md). AI assistance was used in proof development, manuscript preparation, and Lean formalization; no AI system is listed as an author. See [CITATION.md](CITATION.md) for the human author metadata and version-specific citation guidance. No arXiv identifier or journal acceptance is asserted until one has actually been obtained.

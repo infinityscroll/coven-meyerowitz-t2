@@ -1,9 +1,12 @@
-# Citing this research artifact
+# Citation
 
-Suggested title-based citation:
+> Jitendra Prajapati. *Coven–Meyerowitz T2 necessity through coprime stripe collapse.* Preprint, 12 September 2026. https://github.com/infinityscroll/coven-meyerowitz-t2. Specify the commit or release consulted.
 
-> *Coven–Meyerowitz T2 necessity through coprime stripe collapse.* Public research artifact, 10 September 2026. GitHub: https://github.com/infinityscroll/coven-meyerowitz-t2. Specify the release tag or exact commit used.
+- Affiliation: Independent.
+- Email: [23f1001521@ds.study.iitm.ac.in](mailto:23f1001521@ds.study.iitm.ac.in).
+- ORCID: [0009-0008-7493-0311](https://orcid.org/0009-0008-7493-0311).
+- Manuscript license: [Creative Commons Attribution 4.0 International](LICENSE.md).
 
-The hosting account is a repository maintainer, not an independently verified personal authorship attribution. No personal author list, affiliation, ORCID, external referee, journal acceptance, or exclusive discovery priority is inferred by this publication. The paper and code were prepared with AI assistance. Author metadata can be supplied by the responsible human maintainer in a subsequent version.
+AI assistance was used in proof development, manuscript preparation, and Lean formalization. This is an unrefereed preprint, not an assertion of external endorsement, journal acceptance, or an established exclusive-priority claim. An arXiv identifier will be added only after arXiv has assigned it.
 
-No additional reuse license is assigned in this release. This does not change the separate licenses of Lean, Mathlib, or other upstream dependencies, which are fetched rather than vendored. Public access is provided for inspection and reproducibility; requests concerning further reuse should be addressed to the repository maintainer.
+The formalized new statement is unrestricted T2 necessity for finite integer tiles. The mathematical characterization also cites Coven and Meyerowitz's established T1 necessity and T1+T2 sufficiency; those two implications are not yet newly formalized here.

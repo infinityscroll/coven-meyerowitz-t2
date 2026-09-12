@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "Please cite the accompanying preprint and specify the repository commit consulted."
+title: "Coven–Meyerowitz T2 necessity through coprime stripe collapse"
+authors:
+  - family-names: Prajapati
+    given-names: Jitendra
+    affiliation: Independent
+    email: 23f1001521@ds.study.iitm.ac.in
+    orcid: "https://orcid.org/0009-0008-7493-0311"
+url: "https://github.com/infinityscroll/coven-meyerowitz-t2"
+preferred-citation:
+  type: unpublished
+  title: "Coven–Meyerowitz T2 necessity through coprime stripe collapse"
+  authors:
+    - family-names: Prajapati
+      given-names: Jitendra
+      affiliation: Independent
+      email: 23f1001521@ds.study.iitm.ac.in
+      orcid: "https://orcid.org/0009-0008-7493-0311"
+  year: 2026
+  url: "https://github.com/infinityscroll/coven-meyerowitz-t2"
+  notes: "Preprint dated 12 September 2026. Manuscript license: CC BY 4.0. Prepared with AI assistance; external specialist review remains outstanding."
