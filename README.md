@@ -11,7 +11,7 @@ This repository presents a proof of full **T2 necessity for finite integer tiles
 **Status: formally checked statement; public research release for external review.** External specialist acceptance and exclusive discovery priority are not established. Automated reviews are internal checks, not independent human refereeing. See [verification and provenance](audits/VERIFICATION.md).
 
 - [Paper (PDF)](output/pdf/coven-meyerowitz-t2.pdf) · [editable LaTeX source](paper/coven-meyerowitz-t2.tex)
-- [Minimal arXiv source archive](output/arxiv/coven-meyerowitz-t2-source.tar.gz) (the single self-contained manuscript source; no arXiv posting is implied).
+- [Minimal arXiv source archive](output/arxiv/coven-meyerowitz-t2-source.tar.gz) 
 - [Final, fully exposed Lean theorem](formal/FullCovenMeyerowitz.lean)
 - [Verification workflow](.github/workflows/verify.yml) · [all-module verifier](formal/verify_full_t2.sh)
 - [Literature and attribution](audits/LITERATURE.md) · [citation guidance](CITATION.md)
