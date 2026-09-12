@@ -6,14 +6,14 @@ This repository presents a proof of full **T2 necessity for finite integer tiles
 
 The 13 September extension also formalizes the classical T1 necessity and T1+T2 sufficiency implications, yielding a single **full characterization theorem** for arbitrary finite subsets of the integers. The older T2 proof packet and its manifests are preserved unchanged.
 
-**Jitendra Prajapati · Independent**
+**Jitendra Prajapati**
 
-[23f1001521@ds.study.iitm.ac.in](mailto:23f1001521@ds.study.iitm.ac.in) · [ORCID 0009-0008-7493-0311](https://orcid.org/0009-0008-7493-0311)
+[ORCID 0009-0008-7493-0311](https://orcid.org/0009-0008-7493-0311)
 
 **Status: formally checked statement; public research release for external review.** External specialist acceptance and exclusive discovery priority are not established. Automated reviews are internal checks, not independent human refereeing. See [verification and provenance](audits/VERIFICATION.md).
 
 - [Paper (PDF)](output/pdf/coven-meyerowitz-t2.pdf) · [editable LaTeX source](paper/coven-meyerowitz-t2.tex)
-- [Minimal arXiv source archive](output/arxiv/coven-meyerowitz-t2-source.tar.gz) (the single self-contained manuscript source; no arXiv posting is implied).
+- [Minimal arXiv source archive](output/arxiv/coven-meyerowitz-t2-source.tar.gz)
 - [Unrestricted T2 necessity](formal/FullCovenMeyerowitz.lean) · [full characterization](formal/CMCharacterizationSufficiency.lean) · [literal signed-set interface](formal/CMCharacterizationSemanticsAudit.lean)
 - [Verification workflow](.github/workflows/verify.yml) · [complete characterization verifier](formal/verify_characterization.sh) · [preserved T2 verifier](formal/verify_full_t2.sh)
 - [Literature and attribution](audits/LITERATURE.md) · [citation guidance](CITATION.md)
