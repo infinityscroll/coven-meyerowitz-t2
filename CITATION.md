@@ -1,6 +1,6 @@
 # Citation
 
-> Jitendra Prajapati. *Coven–Meyerowitz T2 necessity through coprime stripe collapse.* Preprint, 12 September 2026. https://github.com/infinityscroll/coven-meyerowitz-t2. Specify the commit or release consulted.
+> Jitendra Prajapati. *Coven–Meyerowitz T2 necessity through coprime stripe collapse.* Preprint, 13 September 2026. https://github.com/infinityscroll/coven-meyerowitz-t2. Specify the commit or release consulted.
 
 - Affiliation: Independent.
 - Email: [23f1001521@ds.study.iitm.ac.in](mailto:23f1001521@ds.study.iitm.ac.in).
