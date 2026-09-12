@@ -4,7 +4,7 @@
 
 This repository presents a proof of full **T2 necessity for finite integer tiles**, together with its Lean 4 formalization and an explicit all-module verification workflow.
 
-**Jitendra Prajapati 
+**Jitendra Prajapati** 
 
 [ORCID 0009-0008-7493-0311](https://orcid.org/0009-0008-7493-0311)
 
